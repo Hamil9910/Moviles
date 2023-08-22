@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">FirebaseApp</string>
+    <string name="title_activity_estado_financiero">EstadoFinancieroActivity</string>
+    <string-array name="options_array">
+        <item>Seleccione...</item>
+        <item>Enero</item>
+        <item>Febrero</item>
+        <item>Marzo</item>
+        <item>Abril</item>
+        <item>Mayo</item>
+        <item>Junio</item>
+        <item>Julio</item>
+        <item>Agosto</item>
+        <item>Septiembre</item>
+        <item>Octubre</item>
+        <item>Noviembre</item>
+        <item>Diciembre</item>
+    </string-array>
+</resources>
