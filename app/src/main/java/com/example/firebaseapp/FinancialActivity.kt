@@ -7,14 +7,12 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.example.firebaseapp.databinding.ActivityMainBinding
 import com.example.firebaseapp.models.*
 import com.example.firebaseapp.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 class FinancialActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var database: FirebaseDatabase
     private lateinit var auth: FirebaseAuth
@@ -23,18 +21,11 @@ class FinancialActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.financial_activity)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         firebaseAuth = FirebaseAuth.getInstance()
 
         // Aquí vincula el botón de cerrar sesión en el diseño con su respectivo elemento de la vista.
-        binding.logoutButton.setOnClickListener {
-            firebaseAuth.signOut()
-            val intent = Intent(this, SignInActivity::class.java)
-            startActivity(intent)
-            finish() // Cierra esta actividad para que el usuario no pueda volver atrás.
-        }
+
         database = FirebaseDatabase.getInstance()
         auth = FirebaseAuth.getInstance()
 
