@@ -23,14 +23,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
-        val button: Button = findViewById(R.id.buttonEstado)
-        button.setOnClickListener {
-            val intent = Intent(this, EstadoFinancieroActivity::class.java)
-            startActivity(intent)
-        }
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -50,6 +42,13 @@ class MainActivity : AppCompatActivity() {
         val buttonRead = findViewById<Button>(R.id.buttonRead)
         val buttonUpdate = findViewById<Button>(R.id.buttonUpdate)
         val buttonDelete = findViewById<Button>(R.id.buttonDelete)
+        val buttonEstado = findViewById<Button>(R.id.buttonEstado)
+        buttonEstado.setOnClickListener {
+            // Aquí definimos la acción al hacer clic en el botón
+            val intent = Intent(this, FinancialActivity::class.java)
+            startActivity(intent)
+        }
+
 
         val editTextUserId = findViewById<EditText>(R.id.editTextUserId)
         val editTextName = findViewById<EditText>(R.id.editTextName)
@@ -62,12 +61,14 @@ class MainActivity : AppCompatActivity() {
         val editTextSerieONT = findViewById<EditText>(R.id.editTextSerieONT)
         val editTextIP = findViewById<EditText>(R.id.editTextIP)
         val editTextAnchoBanda = findViewById<EditText>(R.id.editTextAnchoBanda)
-        val editTextInventario = findViewById<EditText>(R.id.editTextInventario)
-        val editTextMes = findViewById<EditText>(R.id.editTextMes)
-        val editTextValor = findViewById<EditText>(R.id.editTextValor)
-        val editTextCuenta = findViewById<EditText>(R.id.editTextCuenta)
-        val editTextValor2 = findViewById<EditText>(R.id.editTextValor2)
-        val editTextEgreso = findViewById<EditText>(R.id.editTextEgreso)
+        //val editTextInventario = findViewById<EditText>(R.id.editTextInventario)
+        //val editTextMes = findViewById<EditText>(R.id.editTextMes)
+        //val editTextValorC1 = findViewById<EditText>(R.id.editTextValorC1)
+        //val editTextValorC2 = findViewById<EditText>(R.id.editTextValorC2)
+        //val editTextValorC3 = findViewById<EditText>(R.id.editTextValorC3)
+        //val editTextValorT1 = findViewById<EditText>(R.id.editTextValorT1)
+        //val editTextValorA1 = findViewById<EditText>(R.id.editTextValorA1)
+        //val editTextValorA2 = findViewById<EditText>(R.id.editTextValorA2)
 
         buttonCreate.setOnClickListener {
             val userId = editTextUserId.text.toString()
@@ -81,12 +82,14 @@ class MainActivity : AppCompatActivity() {
             val serieONT = editTextSerieONT.text.toString()
             val ip = editTextIP.text.toString()
             val anchoBanda = editTextAnchoBanda.text.toString()
-            val inventario = editTextInventario.text.toString()
+            /*val inventario = editTextInventario.text.toString()
             val mes = editTextMes.text.toString()
-            val valor = editTextValor.text.toString()
-            val cuenta = editTextCuenta.text.toString()
-            val valor2 = editTextValor2.text.toString()
-            val egreso = editTextEgreso.text.toString()
+            val valorC1 = editTextValorC1.text.toString()
+            val valorC2 = editTextValorC2.text.toString()
+            val valorC3 = editTextValorC3.text.toString()
+            val valorT1 = editTextValorT1.text.toString()
+            val valorA1 = editTextValorA1.text.toString()
+            val valorA2 = editTextValorA2.text.toString()*/
             // Lógica para crear usuario y guardar en Firebase
 
             // Crear instancias de las clases de datos
@@ -98,13 +101,15 @@ class MainActivity : AppCompatActivity() {
                 phone = phone,
                 address = address
             )
-            val revenueData = RevenueData(
-                valor = valor,
-                cuenta = cuenta,
+            /*val revenueData = RevenueData(
+                valorC1 = valorC1,
+                valorC2 = valorC2,
+                valorC3 = valorC3,
             )
             val outgoData = OutgoData(
-                valor2 = valor2,
-                egreso = egreso,
+                valorT1 = valorT1,
+                valorA1 = valorA1,
+                valorA2 = valorA2,
             )
             val financialData = FinancialData(
                 inventario = inventario,
@@ -112,7 +117,7 @@ class MainActivity : AppCompatActivity() {
                 revenueData = revenueData,
                 outgoData = outgoData
                 //monthData = MonthData(revenueData,outgoData)
-            )
+            )*/
             val technicalData = TechnicalData(
                 manga = manga,
                 servicio = servicio,
@@ -122,7 +127,7 @@ class MainActivity : AppCompatActivity() {
             )
             val user = User(
                 generalData = generalData,
-                financialData = financialData,
+                //financialData = financialData,
                 technicalData = technicalData
             )
             // ... Código para crear el usuario y otras operaciones
@@ -149,12 +154,14 @@ class MainActivity : AppCompatActivity() {
             val newSerieONT = editTextSerieONT.text.toString()
             val newIp = editTextIP.text.toString()
             val newAnchoBanda = editTextAnchoBanda.text.toString()
-            val newInventario = editTextInventario.text.toString()
+            /*val newInventario = editTextInventario.text.toString()
             val newMes = editTextMes.text.toString()
-            val newValor = editTextValor.text.toString()
-            val newCuenta = editTextCuenta.text.toString()
-            val newValor2 = editTextValor2.text.toString()
-            val newEgreso = editTextEgreso.text.toString()
+            val newValorC1 = editTextValorC1.text.toString()
+            val newValorC2 = editTextValorC2.text.toString()
+            val newValorC3 = editTextValorC3.text.toString()
+            val newValorT1 = editTextValorT1.text.toString()
+            val newValorA1 = editTextValorA1.text.toString()
+            val newValorA2 = editTextValorA2.text.toString()*/
 
             // Crear instancias de las clases de datos
             val generalData = GeneralData(
@@ -165,13 +172,15 @@ class MainActivity : AppCompatActivity() {
                 phone = newPhone,
                 address = newAddress
             )
-            val revenueData = RevenueData(
-                valor = newValor,
-                cuenta = newCuenta,
+            /*val revenueData = RevenueData(
+                valorC1 = newValorC1,
+                valorC2 = newValorC2,
+                valorC3 = newValorC3,
             )
             val outgoData = OutgoData(
-                valor2 = newValor2,
-                egreso = newEgreso,
+                valorT1 = newValorT1,
+                valorA1 = newValorA1,
+                valorA2 = newValorA2,
             )
             val financialData = FinancialData(
                 inventario = newInventario,
@@ -179,7 +188,7 @@ class MainActivity : AppCompatActivity() {
                 revenueData = revenueData,
                 outgoData = outgoData
                 //monthData = MonthData(revenueData,outgoData)
-            )
+            )*/
             val technicalData = TechnicalData(
                 manga = newManga,
                 servicio = newServicio,
@@ -189,7 +198,7 @@ class MainActivity : AppCompatActivity() {
             )
             val user = User(
                 generalData = generalData,
-                financialData = financialData,
+                //financialData = financialData,
                 technicalData = technicalData
             )
             // ... Código para actualizar el usuario y otras operaciones
@@ -202,6 +211,7 @@ class MainActivity : AppCompatActivity() {
             val userId = editTextUserId.text.toString()
             deleteUser(userId)
         }
+
     }
 
     private fun clearEditTextFields() {
@@ -216,12 +226,14 @@ class MainActivity : AppCompatActivity() {
         findViewById<EditText>(R.id.editTextSerieONT).text.clear()
         findViewById<EditText>(R.id.editTextIP).text.clear()
         findViewById<EditText>(R.id.editTextAnchoBanda).text.clear()
-        findViewById<EditText>(R.id.editTextInventario).text.clear()
+        /*findViewById<EditText>(R.id.editTextInventario).text.clear()
         findViewById<EditText>(R.id.editTextMes).text.clear()
-        findViewById<EditText>(R.id.editTextValor).text.clear()
-        findViewById<EditText>(R.id.editTextCuenta).text.clear()
-        findViewById<EditText>(R.id.editTextValor2).text.clear()
-        findViewById<EditText>(R.id.editTextEgreso).text.clear()
+        findViewById<EditText>(R.id.editTextValorC1).text.clear()
+        findViewById<EditText>(R.id.editTextValorC2).text.clear()
+        findViewById<EditText>(R.id.editTextValorC3).text.clear()
+        findViewById<EditText>(R.id.editTextValorT1).text.clear()
+        findViewById<EditText>(R.id.editTextValorA1).text.clear()
+        findViewById<EditText>(R.id.editTextValorA2).text.clear()*/
     }
 
     private fun createUserFirebase(user: com.example.firebaseapp.models.User) {
@@ -262,12 +274,14 @@ class MainActivity : AppCompatActivity() {
                         val editTextSerieONT = findViewById<EditText>(R.id.editTextSerieONT)
                         val editTextIP = findViewById<EditText>(R.id.editTextIP)
                         val editTextAnchoBanda = findViewById<EditText>(R.id.editTextAnchoBanda)
-                        val editTextInventario = findViewById<EditText>(R.id.editTextInventario)
+                        /*val editTextInventario = findViewById<EditText>(R.id.editTextInventario)
                         val editTextMes = findViewById<EditText>(R.id.editTextMes)
-                        val editTextValor = findViewById<EditText>(R.id.editTextValor)
-                        val editTextCuenta = findViewById<EditText>(R.id.editTextCuenta)
-                        val editTextValor2 = findViewById<EditText>(R.id.editTextValor2)
-                        val editTextEgreso = findViewById<EditText>(R.id.editTextEgreso)
+                        val editTextValorC1 = findViewById<EditText>(R.id.editTextValorC1)
+                        val editTextValorC2 = findViewById<EditText>(R.id.editTextValorC2)
+                        val editTextValorC3 = findViewById<EditText>(R.id.editTextValorC3)
+                        val editTextValorT1 = findViewById<EditText>(R.id.editTextValorT1)
+                        val editTextValorA1 = findViewById<EditText>(R.id.editTextValorA1)
+                        val editTextValorA2 = findViewById<EditText>(R.id.editTextValorA2)*/
 
                         // Asigna los valores a los EditText correspondientes
                         editTextName.setText(user.generalData?.name)
@@ -280,12 +294,14 @@ class MainActivity : AppCompatActivity() {
                         editTextSerieONT.setText(user.technicalData?.serieONT)
                         editTextIP.setText(user.technicalData?.ip)
                         editTextAnchoBanda.setText(user.technicalData?.anchoBanda)
-                        editTextInventario.setText(user.financialData?.inventario)
+                        /*editTextInventario.setText(user.financialData?.inventario)
                         editTextMes.setText(user.financialData?.mes)
-                        editTextValor.setText(user.financialData?.revenueData?.valor)
-                        editTextCuenta.setText(user.financialData?.revenueData?.cuenta)
-                        editTextValor2.setText(user.financialData?.outgoData?.valor2)
-                        editTextEgreso.setText(user.financialData?.outgoData?.egreso)
+                        editTextValorC1.setText(user.financialData?.revenueData?.valorC1)
+                        editTextValorC2.setText(user.financialData?.revenueData?.valorC2)
+                        editTextValorC3.setText(user.financialData?.revenueData?.valorC3)
+                        editTextValorT1.setText(user.financialData?.outgoData?.valorT1)
+                        editTextValorA1.setText(user.financialData?.outgoData?.valorA1)
+                        editTextValorA2.setText(user.financialData?.outgoData?.valorA2)*/
                     }
                 }
                 override fun onCancelled(error: DatabaseError) {
@@ -317,12 +333,14 @@ class MainActivity : AppCompatActivity() {
                 "technicalData/serieONT" to newTechnicalData?.serieONT.toString(), // Actualiza la serie ONT
                 "technicalData/ip" to newTechnicalData?.ip.toString(),             // Actualiza la dirección IP
                 "technicalData/anchoBanda" to newTechnicalData?.anchoBanda.toString(), // Actualiza el ancho de banda
-                "financialData/inventario" to newFinancialData?.inventario.toString(), // Actualiza el inventario
+               /* "financialData/inventario" to newFinancialData?.inventario.toString(), // Actualiza el inventario
                 "financialData/mes" to newFinancialData?.mes.toString(),           // Actualiza el mes
-                "financialData/revenueData/valor" to newRevenueData?.valor.toString(),         // Actualiza el valor
-                "financialData/revenueData/cuenta" to newRevenueData?.cuenta.toString(),     // Actualiza la cuenta
-                "financialData/outgoData/valor2" to newOutgoData?.valor2.toString(),         // Actualiza el valor2
-                "financialData/outgoData/egreso" to newOutgoData?.egreso.toString()     // Actualiza el egreso
+                "financialData/revenueData/valorC1" to newRevenueData?.valorC1.toString(),     // Actualiza el valor de C1
+                "financialData/revenueData/valorC2" to newRevenueData?.valorC2.toString(),     // Actualiza el valor de C2
+                "financialData/revenueData/valorC3" to newRevenueData?.valorC3.toString(),     // Actualiza el valor de C3
+                "financialData/outgoData/valorT1" to newOutgoData?.valorT1.toString(),         // Actualiza el valor2
+                "financialData/outgoData/valorA1" to newOutgoData?.valorA1.toString(),         // Actualiza el valor2
+                "financialData/outgoData/valorA2" to newOutgoData?.valorA2.toString()*/     // Actualiza el egreso
             )
             database.reference.child("users").child(it).updateChildren(updates)
                 .addOnSuccessListener {

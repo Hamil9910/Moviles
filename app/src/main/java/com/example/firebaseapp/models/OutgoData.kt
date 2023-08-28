@@ -1,6 +1,7 @@
 package com.example.firebaseapp.models
 
 data class OutgoData(
-    val valor2: String = null.toString(),
-    val egreso: String = null.toString()
+    val valorT1: String = null.toString(),
+    val valorA1: String = null.toString(),
+    val valorA2: String = null.toString()
 )
