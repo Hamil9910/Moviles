@@ -2,7 +2,6 @@ package com.example.firebaseapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.content.Intent
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -21,15 +20,11 @@ class FinancialActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.financial_activity)
 
-
         firebaseAuth = FirebaseAuth.getInstance()
-
-        // Aquí vincula el botón de cerrar sesión en el diseño con su respectivo elemento de la vista.
-
         database = FirebaseDatabase.getInstance()
         auth = FirebaseAuth.getInstance()
 
-        //val buttonCreate = findViewById<Button>(R.id.buttonCreate)
+        val buttonCreate = findViewById<Button>(R.id.buttonCreate)
         val buttonRead = findViewById<Button>(R.id.buttonRead)
         val buttonUpdate = findViewById<Button>(R.id.buttonUpdate)
         val buttonDelete = findViewById<Button>(R.id.buttonDelete)
@@ -43,19 +38,9 @@ class FinancialActivity : AppCompatActivity() {
         val editTextValorT1 = findViewById<EditText>(R.id.editTextValorT1)
         val editTextValorA1 = findViewById<EditText>(R.id.editTextValorA1)
         val editTextValorA2 = findViewById<EditText>(R.id.editTextValorA2)
-/*
+
         buttonCreate.setOnClickListener {
             val userId = editTextUserId.text.toString()
-            val name = editTextName.text.toString()
-            val lastName = editTextLastName.text.toString()
-            val email = editTextEmail.text.toString()
-            val phone = editTextPhone.text.toString()
-            val address = editTextAddress.text.toString()
-            val manga = editTextManga.text.toString()
-            val servicio = editTextServicio.text.toString()
-            val serieONT = editTextSerieONT.text.toString()
-            val ip = editTextIP.text.toString()
-            val anchoBanda = editTextAnchoBanda.text.toString()
             val inventario = editTextInventario.text.toString()
             val mes = editTextMes.text.toString()
             val valorC1 = editTextValorC1.text.toString()
@@ -68,12 +53,7 @@ class FinancialActivity : AppCompatActivity() {
 
             // Crear instancias de las clases de datos
             val generalData = GeneralData(
-                id = userId,
-                name = name,
-                lastname = lastName,
-                email = email,
-                phone = phone,
-                address = address
+                id = userId
             )
             val revenueData = RevenueData(
                 valorC1 = valorC1,
@@ -90,19 +70,10 @@ class FinancialActivity : AppCompatActivity() {
                 mes = mes,
                 revenueData = revenueData,
                 outgoData = outgoData
-                //monthData = MonthData(revenueData,outgoData)
-            )
-            val technicalData = TechnicalData(
-                manga = manga,
-                servicio = servicio,
-                serieONT = serieONT,
-                ip = ip,
-                anchoBanda = anchoBanda
             )
             val user = User(
                 generalData = generalData,
-                financialData = financialData,
-                technicalData = technicalData
+                financialData = financialData
             )
             // ... Código para crear el usuario y otras operaciones
             createUserFirebase(user)
@@ -110,13 +81,13 @@ class FinancialActivity : AppCompatActivity() {
             clearEditTextFields()
 
         }
-*/
         buttonRead.setOnClickListener {
             val userId = editTextUserId.text.toString()
             readUser(userId)
         }
 
         buttonUpdate.setOnClickListener {
+            val userId = editTextUserId.text.toString()
             val newInventario = editTextInventario.text.toString()
             val newMes = editTextMes.text.toString()
             val newValorC1 = editTextValorC1.text.toString()
@@ -127,6 +98,9 @@ class FinancialActivity : AppCompatActivity() {
             val newValorA2 = editTextValorA2.text.toString()
 
             // Crear instancias de las clases de datos
+            val generalData = GeneralData(
+                id = userId
+            )
             val revenueData = RevenueData(
                 valorC1 = newValorC1,
                 valorC2 = newValorC2,
@@ -142,9 +116,9 @@ class FinancialActivity : AppCompatActivity() {
                 mes = newMes,
                 revenueData = revenueData,
                 outgoData = outgoData
-                //monthData = MonthData(revenueData,outgoData)
             )
             val user = User(
+                generalData = generalData,
                 financialData = financialData
             )
             // ... Código para actualizar el usuario y otras operaciones
@@ -169,7 +143,7 @@ class FinancialActivity : AppCompatActivity() {
         findViewById<EditText>(R.id.editTextValorA1).text.clear()
         findViewById<EditText>(R.id.editTextValorA2).text.clear()
     }
-/*
+
     private fun createUserFirebase(user: com.example.firebaseapp.models.User) {
         val userId = user.generalData?.id
 
@@ -179,15 +153,15 @@ class FinancialActivity : AppCompatActivity() {
                 .addOnSuccessListener {
                     // Escritura exitosa
                     Log.d("Firebase", "Write successful")
-                    Toast.makeText(this@MainActivity,"Usuario Creado",Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@FinancialActivity,"Usuario Financiero Creado",Toast.LENGTH_LONG).show()
                 }
                 .addOnFailureListener {
                     // Error en la escritura
                     Log.e("Firebase", "Error writing to database: ${it.message}")
+                    Toast.makeText(this@FinancialActivity,"No hay Usuario!!",Toast.LENGTH_LONG).show()
                 }
         }
     }
-*/
     private fun readUser(userId: String) {
         val database = FirebaseDatabase.getInstance() // Asegúrate de obtener una instancia de la base de datos
         val reference = database.reference.child("users").child(userId)
@@ -196,7 +170,6 @@ class FinancialActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val user = snapshot.getValue(User::class.java)
                 user?.let {
-                    // Obtén una referencia a cada EditText
                     // Obtén una referencia a cada EditText
                     val editTextInventario = findViewById<EditText>(R.id.editTextInventario)
                     val editTextMes = findViewById<EditText>(R.id.editTextMes)
@@ -221,6 +194,7 @@ class FinancialActivity : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {
                 // Manejo de error en caso de cancelación
                 Log.e("Firebase", "Read canceled: ${error.message}")
+                Toast.makeText(this@FinancialActivity,"No hay Lectura!!",Toast.LENGTH_LONG).show()
             }
         })
     }
@@ -253,6 +227,7 @@ class FinancialActivity : AppCompatActivity() {
                 .addOnFailureListener {
                     // Error en la actualización
                     Log.e("Firebase", "Error updating user: ${it.message}")
+                    Toast.makeText(this@FinancialActivity,"No hay UsuarioAc!!",Toast.LENGTH_LONG).show()
                 }
         }
     }
